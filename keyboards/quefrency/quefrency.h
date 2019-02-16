@@ -7,6 +7,10 @@
     #include "rev1.h"
 #endif
 
+#ifdef KEYBOARD_quefrency_rev2
+    #include "rev2.h"
+#endif
+
 // Used to create a keymap using only KC_ prefixed keys
 #define LAYOUT_kc( \
     LA1, LA2, LA3, LA4, LA5, LA6, RA1, RA2, RA3, RA4, RA5, RA6, RA7, \
