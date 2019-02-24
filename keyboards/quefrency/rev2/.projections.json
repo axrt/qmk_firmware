@@ -1,0 +1,17 @@
+{
+    "*": {
+        "dispatch": "sudo make quefrency/rev2:alext:avrdude"
+    },
+    "*.c": {
+        "alternate": "",
+        "type": "source"
+    },
+    "*.h": {
+        "alternate": "",
+        "type": "header"
+    },
+    "*.mk": {
+        "alternate": "",
+        "type": "make"
+    }
+}
