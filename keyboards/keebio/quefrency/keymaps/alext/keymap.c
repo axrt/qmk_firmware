@@ -14,7 +14,10 @@ enum custom_keycodes {
    QWERTY = SAFE_RANGE,
    FIRE,
    KITTY,
-   NVIM
+   NVIM,
+   FINDER,
+   MATTERMOST,
+   WHATSAPP
 };
 
 #define _______    KC_TRNS
@@ -39,9 +42,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    [_FN2] = LAYOUT(
       KC_GESC,  KC_BRIGHTNESS_DOWN, KC_BRIGHTNESS_UP, _______, _______,    _______,    _______,      _______,      _______,       _______,     _______, _______, _______, _______, \
-      _______,  _______,            _______,          _______, _______,    _______,    _______,      _______,      _______,       _______,     _______, _______, _______, _______, \
+      _______,  _______,            WHATSAPP,         _______, _______,    _______,    _______,      _______,      FINDER,        _______,     _______, _______, _______, _______, \
       _______,  _______,            _______,          _______, FIRE,       _______,    _______,      _______,      KITTY,         _______,     _______, _______, _______,          \
-      _______,  _______,            _______,          _______, _______,    _______,    NVIM,         _______,      _______,       _______,     _______, _______, _______, _______, \
+      _______,  _______,            _______,          _______, _______,    _______,    NVIM,         MATTERMOST,   _______,       _______,     _______, _______, _______, _______, \
       _______,  _______,            _______,          _______, _______,    _______,    _______,      _______,      _______,       _______,     _______, _______, _______
       )
 };
@@ -61,6 +64,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    case NVIM :
       if (record->event.pressed) {
          SEND_STRING("nvim" SS_TAP(X_ENTER));
+      }
+      break;
+   case FINDER :
+      if (record->event.pressed) {
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)) "Finder"SS_TAP (X_ENTER));
+      }
+      break;
+   case MATTERMOST :
+      if (record->event.pressed) {
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)) "Mattermost"SS_TAP (X_ENTER));
+      }
+      break;
+   case WHATSAPP :
+      if (record->event.pressed) {
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)) "Whatsapp"SS_TAP (X_ENTER));
       }
       break;
    }
