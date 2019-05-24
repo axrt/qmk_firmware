@@ -11,13 +11,14 @@ enum custom_keycodes {
    NVIM_CONFIG_EDIT,
    ZSH_CONFIG_EDIT,
    HIST_GREP,
-   SAFARI_BOOKS
+   SAFARI_BOOKS,
+   TMUX_RENAME_PANE
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [_BASE] = LAYOUT_ortho_4x4(
       EMAIL,     SSH_CONFIG_EDIT, NVIM_CONFIG_EDIT, ZSH_CONFIG_EDIT, \
-      HIST_GREP, SAFARI_BOOKS,    _______,          _______,         \
+      HIST_GREP, SAFARI_BOOKS,    TMUX_RENAME_PANE, _______,         \
       _______,   _______,         _______,          _______,         \
       MO(_FN1),  MO(_FN2),        _______,          _______          \
       ),
@@ -68,6 +69,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
          SEND_STRING(
             "safaribooks.py --cred 'atuzhikov@illumina.com:0B7iYmD67BHg' ");
+      }
+      break;
+   case TMUX_RENAME_PANE:
+      if (record->event.pressed) {
+         SEND_STRING(SS_LCTRL("a") ":" "select-pane -T '");
       }
       break;
    }
