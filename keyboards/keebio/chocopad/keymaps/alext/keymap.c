@@ -16,15 +16,18 @@ enum custom_keycodes {
    TMUX_ONE,
    TMUX_TWO,
    TMUX_THREE,
-   TMUX_FOUR
+   TMUX_FOUR,
+   TMUX_LEFT_WINDOW,
+   TMUX_RIGHT_WINDOW,
+   RSYNC
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [_BASE] = LAYOUT_ortho_4x4(
-      EMAIL,     SSH_CONFIG_EDIT, NVIM_CONFIG_EDIT, ZSH_CONFIG_EDIT, \
-      HIST_GREP, SAFARI_BOOKS,    TMUX_RENAME_PANE, _______,         \
-      TMUX_ONE,  TMUX_TWO,        TMUX_THREE,       TMUX_FOUR,       \
-      MO(_FN1),  MO(_FN2),        _______,          _______          \
+      EMAIL,     SSH_CONFIG_EDIT, NVIM_CONFIG_EDIT, ZSH_CONFIG_EDIT,  \
+      HIST_GREP, SAFARI_BOOKS,    TMUX_RENAME_PANE, RSYNC,            \
+      TMUX_ONE,  TMUX_TWO,        TMUX_THREE,       TMUX_FOUR,        \
+      MO(_FN1),  MO(_FN2),        TMUX_LEFT_WINDOW, TMUX_RIGHT_WINDOW \
       ),
 
    [_FN1] = LAYOUT_ortho_4x4(
@@ -98,6 +101,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    case TMUX_FOUR :
       if (record->event.pressed) {
          SEND_STRING(SS_LCTRL("a") "s" "3");
+      }
+      break;
+   case TMUX_LEFT_WINDOW:
+      if (record->event.pressed) {
+         SEND_STRING(SS_LCTRL("a") "[");
+      }
+      break;
+   case TMUX_RIGHT_WINDOW:
+      if (record->event.pressed) {
+         SEND_STRING(SS_LCTRL("a") "]");
+      }
+      break;
+   case RSYNC :
+      if (record->event.pressed) {
+         SEND_STRING("rsync -avhP ");
       }
       break;
    }
