@@ -103,12 +103,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
          SEND_STRING(SS_LCTRL("a") "s" "3");
       }
       break;
-   case TMUX_LEFT_WINDOW:
+   case TMUX_LEFT_WINDOW :
       if (record->event.pressed) {
          SEND_STRING(SS_LCTRL("a") "[");
       }
       break;
-   case TMUX_RIGHT_WINDOW:
+   case TMUX_RIGHT_WINDOW :
       if (record->event.pressed) {
          SEND_STRING(SS_LCTRL("a") "]");
       }
