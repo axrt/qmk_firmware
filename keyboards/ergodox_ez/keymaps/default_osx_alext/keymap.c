@@ -30,7 +30,8 @@ enum custom_keycodes {
    TMUX_RIGHT_WINDOW,
    TMUX_UPPER_SESSION,
    TMUX_LOWER_SESSION,
-   RSYNC
+   RSYNC,
+   SEARCH
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -51,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        | Home | End  |       |TLWind|TRWind|
  *                                 ,------|------|------|       |------+-------+------.
  *                                 |      |      | PgUp |       |TUSess|       |      |
- *                                 | Enter| Lang |------|       |------| AVAIL | AVAIL|
+ *                                 | Enter| Lang |------|       |------| AVAIL |SEARCH|
  *                                 |      |      | PgDn |       |TLSess|       |      |
  *                                 `--------------------'       `---------------------'
  */
@@ -75,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_SPC,             KC_GRV,            KC_LBRC,     KC_RBRC,       NVIM,
       TMUX_LEFT_WINDOW,   TMUX_RIGHT_WINDOW,
       TMUX_UPPER_SESSION,
-      TMUX_LOWER_SESSION, KC_NO,             KC_NO
+      TMUX_LOWER_SESSION, KC_NO,             SEARCH
       ),
 
 /* Keymap 1: Motion layer
@@ -105,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_NO,              KC_NO,             KC_NO,       KC_NO,         KC_NO,      KC_NO,      KC_NO,
       KC_NO,              KC_NO,             KC_NO,       KC_NO,         KC_MS_BTN1, KC_MS_BTN2,
       KC_NO,              KC_NO,             KC_NO,       KC_NO,         KC_NO,      KC_NO,      KC_NO,
-      KC_NO,              KC_NO,             KC_NO,       KC_NO,         KC_NO,
+      KC_LSFT,            KC_NO,             KC_NO,       KC_LCMD,       KC_NO,
       KC_NO,              KC_NO,
       KC_NO,
       KC_NO,              KC_NO,             KC_NO,
@@ -337,6 +338,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    case RSYNC :
       if (record->event.pressed) {
          SEND_STRING("rsync -avhP ");
+      }
+      break;
+   case SEARCH :
+      if (record->event.pressed) {
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)));
       }
       break;
    }
