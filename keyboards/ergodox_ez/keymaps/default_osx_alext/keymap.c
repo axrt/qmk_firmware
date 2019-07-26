@@ -31,7 +31,8 @@ enum custom_keycodes {
    TMUX_UPPER_SESSION,
    TMUX_LOWER_SESSION,
    RSYNC,
-   SEARCH
+   SEARCH,
+   FIREFOX
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -52,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        | Home | End  |       |TLWind|TRWind|
  *                                 ,------|------|------|       |------+-------+------.
  *                                 |      |      | PgUp |       |TUSess|       |      |
- *                                 | Enter| Lang |------|       |------| AVAIL |SEARCH|
+ *                                 | Enter| Lang |------|       |------|FIREFOX|SEARCH|
  *                                 |      |      | PgDn |       |TLSess|       |      |
  *                                 `--------------------'       `---------------------'
  */
@@ -76,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_SPC,             KC_GRV,            KC_LBRC,     KC_RBRC,       NVIM,
       TMUX_LEFT_WINDOW,   TMUX_RIGHT_WINDOW,
       TMUX_UPPER_SESSION,
-      TMUX_LOWER_SESSION, KC_NO,             SEARCH
+      TMUX_LOWER_SESSION, FIREFOX,           SEARCH
       ),
 
 /* Keymap 1: Motion layer
@@ -105,8 +106,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS,            KC_F1,             KC_F2,       KC_F3,         KC_F4,      KC_F5,      KC_F6,
       KC_NO,              KC_NO,             KC_NO,       KC_NO,         KC_NO,      KC_NO,      KC_NO,
       KC_NO,              KC_NO,             KC_NO,       KC_NO,         KC_MS_BTN1, KC_MS_BTN2,
-      KC_NO,              KC_NO,             KC_NO,       KC_NO,         KC_NO,      KC_NO,      KC_NO,
-      KC_LSFT,            KC_NO,             KC_NO,       KC_LCMD,       KC_NO,
+      KC_LSFT,            KC_NO,             KC_NO,       KC_NO,         KC_NO,      KC_NO,      KC_NO,
+      KC_NO,              KC_NO,             KC_NO,       KC_LCMD,       KC_NO,
       KC_NO,              KC_NO,
       KC_NO,
       KC_NO,              KC_NO,             KC_NO,
@@ -343,6 +344,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    case SEARCH :
       if (record->event.pressed) {
          SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)));
+      }
+      break;
+   case FIREFOX :
+      if (record->event.pressed) {
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)) "fire" SS_TAP(X_ENTER));
       }
       break;
    }
