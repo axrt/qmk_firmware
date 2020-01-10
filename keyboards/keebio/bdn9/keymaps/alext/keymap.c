@@ -17,14 +17,14 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [0] = LAYOUT(
-      KC_MUTE,               MO(1),               RGB_MODE_FORWARD, \
-      KC_MEDIA_FAST_FORWARD, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_REWIND,  \
-      KC_PGDOWN,             KC_HOME,             KC_PGUP           \
+      KC_MUTE,         MO(1),               RGB_MODE_FORWARD,     \
+      KC_MEDIA_REWIND, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_FAST_FORWARD \
+      KC_PGDOWN,       KC_HOME,             KC_PGUP               \
       ),
    [1] = LAYOUT(
-      RGB_TOG,               KC_NO,               BL_TOGG, \
-      RGB_HUI,               RGB_SAI,             BL_INC,  \
-      RGB_HUD,               RGB_SAD,             BL_DEC   \
+      RGB_TOG,         KC_NO,               BL_TOGG, \
+      RGB_HUI,         RGB_SAI,             BL_INC,  \
+      RGB_HUD,         RGB_SAD,             BL_DEC   \
       ),
 };
 
