@@ -86,6 +86,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
          SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_MINS) SS_UP(X_LGUI)));
          _delay_ms(100);
          SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_9) SS_UP(X_LGUI)));
+         _delay_ms(100);
+	 SEND_STRING(SS_TAP(X_MEDIA_FAST_FORWARD));
       }
       break;
    }
