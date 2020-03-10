@@ -14,12 +14,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#define DEFAULT_TIMEOUT 300
+void select_music(void);
+
+enum custom_keycodes {
+	MUSIC,
+	MUSIC_DISLIKE,
+	MUSIC_LIKE,
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [0] = LAYOUT(
       KC_MUTE,         MO(1),               RGB_MODE_FORWARD,      \
       KC_MEDIA_REWIND, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_FAST_FORWARD, \
-      KC_PGDOWN,       KC_HOME,             KC_PGUP                \
+      MUSIC_LIKE,      MUSIC_DISLIKE,       MUSIC                  \
       ),
    [1] = LAYOUT(
       RGB_TOG,         KC_NO,               BL_TOGG, \
@@ -43,4 +51,43 @@ void encoder_update_user(uint8_t index, bool clockwise) {
          tap_code(KC_BRIGHTNESS_DOWN);
       }
    }
+}
+void select_music(){
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)));
+         _delay_ms(DEFAULT_TIMEOUT);
+         SEND_STRING("music");
+         _delay_ms(DEFAULT_TIMEOUT);
+         SEND_STRING(SS_TAP(X_ENTER));
+}
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+   switch (keycode) {
+   case MUSIC:
+      if (record->event.pressed) {
+	  select_music();
+      }
+      break;
+   case MUSIC_LIKE:
+      if (record->event.pressed) {
+	 select_music();
+         _delay_ms(DEFAULT_TIMEOUT);
+	 SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_L) SS_UP(X_LGUI));
+         _delay_ms(DEFAULT_TIMEOUT);
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_0) SS_UP(X_LGUI)));
+         _delay_ms(100);
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_EQL) SS_UP(X_LGUI)));
+      }
+      break;
+   case MUSIC_DISLIKE:
+      if (record->event.pressed) {
+	 select_music();
+         _delay_ms(DEFAULT_TIMEOUT);
+	 SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_L) SS_UP(X_LGUI));
+         _delay_ms(DEFAULT_TIMEOUT);
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_MINS) SS_UP(X_LGUI)));
+         _delay_ms(100);
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_9) SS_UP(X_LGUI)));
+      }
+      break;
+   }
+   return true;
 }
