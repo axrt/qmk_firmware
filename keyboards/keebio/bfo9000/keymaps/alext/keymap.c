@@ -133,6 +133,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
          SEND_STRING(":AsyncTaskEdit");
          _delay_ms(300);
          SEND_STRING(SS_TAP(X_ENTER));
+         _delay_ms(300);
+         SEND_STRING(SS_TAP(X_TAB));
       }
       break;
    case COC_CONFIG :
