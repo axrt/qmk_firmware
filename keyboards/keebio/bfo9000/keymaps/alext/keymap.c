@@ -114,7 +114,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
          SEND_STRING(SS_TAP(X_ESC));
          _delay_ms(100);
-         SEND_STRING(":UltisnipsEdit");
+         SEND_STRING(":UltiSnipsEdit");
          _delay_ms(300);
          SEND_STRING(SS_TAP(X_ENTER));
       }
