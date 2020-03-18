@@ -9,8 +9,11 @@ enum custom_keycodes {
    CALIBRE,
    CHROME,
    COC_CONFIG,
+   DOCUMENTS,
    DOUBLE_ZERO,
+   DOWNLOADS,
    FANTASTICAL,
+   FINDER,
    GIT_KRAKEN,
    GIT_PUSH_BB,
    GIT_PUSH_BB_MASTER,
@@ -36,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       TEST_NEAREST, KC_NO,       ULTISNIPS_EDIT, GIT_PUSH_BB, GIT_PUSH_BB_MASTER, ASYNC_TASK_EDIT,  KC_NO, KC_NO,       PRINT_SCREEN, \
       COC_CONFIG,   KC_NO,       KC_NO,          KC_NO,       KC_NO,              KC_NO,            KC_7,  KC_8,        KC_9,         \
       KC_NO,        KC_NO,       KC_NO,          KC_NO,       KC_NO,              KC_NO,            KC_4,  KC_5,        KC_6,         \
-      CHROME,       POMODORO,    CALIBRE,        KC_NO,       KC_NO,              KC_NO,            KC_1,  KC_2,        KC_3,         \
+      CHROME,       POMODORO,    CALIBRE,        FINDER,      DOWNLOADS,          DOCUMENTS,        KC_1,  KC_2,        KC_3,         \
       SPARK,        FANTASTICAL, GIT_KRAKEN,     MARGIN_NOTE, OMNIFOCUS,          ACTIVITY_MONITOR, KC_0,  DOUBLE_ZERO, TRIPLE_ZERO   \
       )
 };
@@ -171,6 +174,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    case CALIBRE :
       if (record->event.pressed) {
          SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)) "Calibre");
+         _delay_ms(300);
+         SEND_STRING(SS_TAP(X_ENTER));
+      }
+      break;
+   case FINDER :
+      if (record->event.pressed) {
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)) "Finder");
+         _delay_ms(300);
+         SEND_STRING(SS_TAP(X_ENTER));
+      }
+      break;
+   case DOWNLOADS :
+      if (record->event.pressed) {
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)) "Downloads");
+         _delay_ms(300);
+         SEND_STRING(SS_TAP(X_ENTER));
+      }
+      break;
+   case DOCUMENTS :
+      if (record->event.pressed) {
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)) "Documents");
          _delay_ms(300);
          SEND_STRING(SS_TAP(X_ENTER));
       }
