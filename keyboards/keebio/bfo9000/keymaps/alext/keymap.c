@@ -67,7 +67,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
          SEND_STRING(SS_TAP(X_ESC));
          _delay_ms(100);
-         SEND_STRING(":Gstatus");
+         SEND_STRING(":Git");
          _delay_ms(300);
          SEND_STRING(SS_TAP(X_ENTER));
       }
@@ -76,14 +76,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
          SEND_STRING(SS_TAP(X_ESC));
          _delay_ms(100);
-         SEND_STRING(":Gpush gh ");
+         SEND_STRING(":Git push gh ");
       }
       break;
    case GIT_PUSH_GH_MASTER :
       if (record->event.pressed) {
          SEND_STRING(SS_TAP(X_ESC));
          _delay_ms(100);
-         SEND_STRING(":Gpush gh master");
+         SEND_STRING(":Git push gh master");
          _delay_ms(300);
          SEND_STRING(SS_TAP(X_ENTER));
       }
@@ -92,14 +92,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
          SEND_STRING(SS_TAP(X_ESC));
          _delay_ms(100);
-         SEND_STRING(":Gpush bb ");
+         SEND_STRING(":Git push bb ");
       }
       break;
    case GIT_PUSH_BB_MASTER :
       if (record->event.pressed) {
          SEND_STRING(SS_TAP(X_ESC));
          _delay_ms(100);
-         SEND_STRING(":Gpush bb master");
+         SEND_STRING(":Git push bb master");
          _delay_ms(300);
          SEND_STRING(SS_TAP(X_ENTER));
       }
