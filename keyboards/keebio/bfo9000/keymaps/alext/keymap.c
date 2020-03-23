@@ -27,6 +27,8 @@ enum custom_keycodes {
    POMODORO,
    PREFERENCES,
    PRINT_SCREEN,
+   SPACE_LEFT,
+   SPACE_RIGHT,
    SPARK,
    TEST_NEAREST,
    TRIPLE_ZERO,
@@ -34,13 +36,13 @@ enum custom_keycodes {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-   [_BASE] = LAYOUT(                                                                                                                  \
-      OPEN_HEADER,  OPEN_SOURCE, G_STATUS,       GIT_PUSH_GH, GIT_PUSH_GH_MASTER, ASYNC_TASK,       KC_NO, KC_NO,       PREFERENCES,  \
-      TEST_NEAREST, KC_NO,       ULTISNIPS_EDIT, GIT_PUSH_BB, GIT_PUSH_BB_MASTER, ASYNC_TASK_EDIT,  KC_NO, KC_NO,       PRINT_SCREEN, \
-      COC_CONFIG,   KC_NO,       KC_NO,          KC_NO,       KC_NO,              KC_NO,            KC_7,  KC_8,        KC_9,         \
-      KC_NO,        KC_NO,       KC_NO,          KC_NO,       KC_NO,              KC_NO,            KC_4,  KC_5,        KC_6,         \
-      CHROME,       POMODORO,    CALIBRE,        FINDER,      DOWNLOADS,          DOCUMENTS,        KC_1,  KC_2,        KC_3,         \
-      SPARK,        FANTASTICAL, GIT_KRAKEN,     MARGIN_NOTE, OMNIFOCUS,          ACTIVITY_MONITOR, KC_0,  DOUBLE_ZERO, TRIPLE_ZERO   \
+   [_BASE] = LAYOUT(                                                                                                                       \
+      OPEN_HEADER,  OPEN_SOURCE, G_STATUS,       GIT_PUSH_GH, GIT_PUSH_GH_MASTER, ASYNC_TASK,       SPACE_LEFT, SPACE_RIGHT, PREFERENCES,  \
+      TEST_NEAREST, KC_NO,       ULTISNIPS_EDIT, GIT_PUSH_BB, GIT_PUSH_BB_MASTER, ASYNC_TASK_EDIT,  KC_NO,      KC_NO,       PRINT_SCREEN, \
+      COC_CONFIG,   KC_NO,       KC_NO,          KC_NO,       KC_NO,              KC_NO,            KC_7,       KC_8,        KC_9,         \
+      KC_NO,        KC_NO,       KC_NO,          KC_NO,       KC_NO,              KC_NO,            KC_4,       KC_5,        KC_6,         \
+      CHROME,       POMODORO,    CALIBRE,        FINDER,      DOWNLOADS,          DOCUMENTS,        KC_1,       KC_2,        KC_3,         \
+      SPARK,        FANTASTICAL, GIT_KRAKEN,     MARGIN_NOTE, OMNIFOCUS,          ACTIVITY_MONITOR, KC_0,       DOUBLE_ZERO, TRIPLE_ZERO   \
       )
 };
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -246,6 +248,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
          SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)) "System Preferences");
          _delay_ms(300);
          SEND_STRING(SS_TAP(X_ENTER));
+      }
+      break;
+   case SPACE_LEFT :
+      if (record->event.pressed) {
+         SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_LEFT) SS_UP(X_LCTL));
+      }
+      break;
+   case SPACE_RIGHT :
+      if (record->event.pressed) {
+         SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_RIGHT) SS_UP(X_LCTL));
       }
       break;
    case POMODORO :
