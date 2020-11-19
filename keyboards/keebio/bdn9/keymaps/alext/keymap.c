@@ -14,13 +14,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
-#define DEFAULT_TIMEOUT 300
+#define DEFAULT_TIMEOUT    300
 void select_music(void);
 
 enum custom_keycodes {
-	MUSIC,
-	MUSIC_DISLIKE,
-	MUSIC_LIKE,
+   MUSIC,
+   MUSIC_DISLIKE,
+   MUSIC_LIKE,
+   NOIZO_PLAY,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -31,8 +32,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       ),
    [1] = LAYOUT(
       RGB_TOG,         KC_NO,               BL_TOGG, \
-      RGB_HUI,         RGB_SAI,             BL_INC,  \
-      RGB_HUD,         RGB_SAD,             BL_DEC   \
+      RGB_HUI,         NOIZO_PLAY,          BL_INC,  \
+      RGB_HUD,         KC_NO,               BL_DEC   \
       ),
 };
 
@@ -52,42 +53,49 @@ void encoder_update_user(uint8_t index, bool clockwise) {
       }
    }
 }
-void select_music(){
-         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)));
-         _delay_ms(DEFAULT_TIMEOUT);
-         SEND_STRING("music");
-         _delay_ms(DEFAULT_TIMEOUT);
-         SEND_STRING(SS_TAP(X_ENTER));
+
+void select_music() {
+   SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_F) SS_UP(X_LGUI)));
+   _delay_ms(DEFAULT_TIMEOUT);
+   SEND_STRING("music");
+   _delay_ms(DEFAULT_TIMEOUT);
+   SEND_STRING(SS_TAP(X_ENTER));
 }
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    switch (keycode) {
-   case MUSIC:
+   case MUSIC :
       if (record->event.pressed) {
-	  select_music();
+         select_music();
       }
       break;
-   case MUSIC_LIKE:
+   case NOIZO_PLAY :
       if (record->event.pressed) {
-	 select_music();
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_UP) SS_UP(X_LGUI)));
+      }
+      break;
+   case MUSIC_LIKE :
+      if (record->event.pressed) {
+         select_music();
          _delay_ms(DEFAULT_TIMEOUT);
-	 SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_L) SS_UP(X_LGUI));
+         SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_L) SS_UP(X_LGUI));
          _delay_ms(DEFAULT_TIMEOUT);
          SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_0) SS_UP(X_LGUI)));
       }
       break;
-   case MUSIC_DISLIKE:
+   case MUSIC_DISLIKE :
       if (record->event.pressed) {
-	 select_music();
+         select_music();
          _delay_ms(DEFAULT_TIMEOUT);
-	 SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_L) SS_UP(X_LGUI));
+         SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_L) SS_UP(X_LGUI));
          _delay_ms(DEFAULT_TIMEOUT);
          SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_MINS) SS_UP(X_LGUI)));
          _delay_ms(100);
          SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_9) SS_UP(X_LGUI)));
          _delay_ms(100);
-	 SEND_STRING(SS_TAP(X_MEDIA_FAST_FORWARD));
+         SEND_STRING(SS_TAP(X_MEDIA_FAST_FORWARD));
       }
       break;
    }
-   return true;
+   return(true);
 }
