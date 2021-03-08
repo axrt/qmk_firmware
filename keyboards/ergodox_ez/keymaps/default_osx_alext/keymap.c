@@ -16,6 +16,8 @@
 
 enum custom_keycodes {
    QWERTY = SAFE_RANGE,
+   ZOOM_IN,
+   ZOOM_OUT,
    EMAIL,
    NVIM,
    SSH_CONFIG_EDIT,
@@ -118,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_F7,              KC_F8,             KC_F9,       KC_F10,        KC_F11,        KC_F12,     KC_NO,
       MISSION_CONTROL,    KC_MS_WH_RIGHT,    KC_MS_WH_UP, KC_MS_WH_DOWN, KC_MS_WH_LEFT, KC_NO,      KC_NO,
       KC_MS_LEFT,         KC_MS_DOWN,        KC_MS_UP,    KC_MS_RIGHT,   KC_NO,         KC_NO,
-      EXPOSE,             KC_NO,             KC_NO,       KC_NO,         KC_NO,         KC_NO,      KC_NO,
+      EXPOSE,             KC_NO,             ZOOM_IN,     ZOOM_OUT,      KC_NO,         KC_NO,      KC_NO,
       KC_NO,              KC_NO,             KC_NO,       KC_NO,         KC_NO,
       KC_NO,              KC_NO,
       KC_NO,
@@ -258,6 +260,16 @@ void matrix_scan_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    switch (keycode) {
+   case ZOOM_IN :
+      if (record->event.pressed) {
+         SEND_STRING(SS_LCMD("="));
+      }
+      break;
+   case ZOOM_OUT :
+      if (record->event.pressed) {
+         SEND_STRING(SS_LCMD("-"));
+      }
+      break;
    case EMAIL :
       if (record->event.pressed) {
          SEND_STRING("alexander.tuzhikov@gmail.com");
