@@ -1,64 +1,71 @@
 /*
-Copyright 2012 Jun Wako <wakojun@gmail.com>
-Copyright 2013 Oleg Kostyuk <cub.uanic@gmail.com>
-Copyright 2015 ZSA Technology Labs Inc (@zsa)
-Copyright 2020 Christopher Courtney <drashna@live.com> (@drashna)
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Copyright 2012 Jun Wako <wakojun@gmail.com>
+ * Copyright 2013 Oleg Kostyuk <cub.uanic@gmail.com>
+ * Copyright 2015 ZSA Technology Labs Inc (@zsa)
+ * Copyright 2020 Christopher Courtney <drashna@live.com> (@drashna)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #pragma once
 
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID       0x3297
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    ZSA Technology Labs
-#define PRODUCT_ID      0x4974
-#define PRODUCT         ErgoDox EZ
+#define VENDOR_ID                               0x3297
+#define DEVICE_VER                              0x0001
+#define MANUFACTURER                            ZSA Technology Labs
+#define PRODUCT_ID                              0x4974
+#define PRODUCT                                 ErgoDox EZ
 
 /* key matrix size */
-#define MATRIX_ROWS 14
-#define MATRIX_ROWS_PER_SIDE (MATRIX_ROWS / 2)
-#define MATRIX_COLS 6
+#define MATRIX_ROWS                             14
+#define MATRIX_ROWS_PER_SIDE                    (MATRIX_ROWS / 2)
+#define MATRIX_COLS                             6
 
-#define COL_EXPANDED { true, true, true, true, true, true, true, false, false, false, false, false, false, false }
-#define MATRIX_ONBOARD_ROW_PINS { 0, 0, 0, 0, 0, 0, 0, B0,  B1,  B2,  B3,  D2,  D3,  C6 }
-#define MATRIX_ONBOARD_COL_PINS { F0,  F1,  F4,  F5,  F6,  F7 }
-#define DIODE_DIRECTION COL2ROW
-#define EXPANDER_COL_REGISTER GPIOB
-#define EXPANDER_ROW_REGISTER GPIOA
-#define MATRIX_EXPANDER_COL_PINS { 5, 4, 3, 2, 1, 0 }
-#define MATRIX_EXPANDER_ROW_PINS { 0, 1, 2, 3, 4, 5, 6 }
+#define COL_EXPANDED                            { true, true, true, true, true, true, true, false, false, false, false, false, false, false }
+#define MATRIX_ONBOARD_ROW_PINS                 { 0, 0, 0, 0, 0, 0, 0, B0, B1, B2, B3, D2, D3, C6 }
+#define MATRIX_ONBOARD_COL_PINS                 { F0, F1, F4, F5, F6, F7 }
+#define DIODE_DIRECTION                         COL2ROW
+#define EXPANDER_COL_REGISTER                   GPIOB
+#define EXPANDER_ROW_REGISTER                   GPIOA
+#define MATRIX_EXPANDER_COL_PINS                { 5, 4, 3, 2, 1, 0 }
+#define MATRIX_EXPANDER_ROW_PINS                { 0, 1, 2, 3, 4, 5, 6 }
 
+#define MK_KINETIC_SPEED                        1
+#define MOUSEKEY_INTERVAL                       10
+#define MOUSEKEY_MOVE_DELTA                     5
+#define MOUSEKEY_DELAY                          10
+#define MOUSEKEY_TIME_TO_MAX                    30
+#define MOUSEKEY_MAX_SPEED                      10
+#define MOUSEKEY_WHEEL_DELAY                    0
+#define MOUSEKEY_WHEEL_INTERVAL                 20
+#define MOUSEKEY_WHEEL_MAX_SPEED                3
+#define MOUSEKEY_WHEEL_INITIAL_MOVEMENTS        10
+#define MOUSEKEY_WHEEL_BASE_MOVEMENTS           10
+#define MOUSEKEY_WHEEL_ACCELERATED_MOVEMENTS    10
+#define MOUSEKEY_WHEEL_DECELERATED_MOVEMENTS    8
 
-#define MOUSEKEY_INTERVAL       10
-#define MOUSEKEY_DELAY          0
-#define MOUSEKEY_TIME_TO_MAX    60
-#define MOUSEKEY_MAX_SPEED      10
-#define MOUSEKEY_WHEEL_DELAY 0
+#define DEBOUNCE                                30
 
-#define DEBOUNCE 30
-
-#define TAPPING_TOGGLE  1
+#define TAPPING_TOGGLE                          1
 
 /* define if matrix has ghost */
 //#define MATRIX_HAS_GHOST
 
-#define TAPPING_TERM    200
-#define IGNORE_MOD_TAP_INTERRUPT // this makes it possible to do rolling combos (zx) with keys that convert to other keys on hold (z becomes ctrl when you hold it, and when this option isn't enabled, z rapidly followed by x actually sends Ctrl-x. That's bad.)
+#define TAPPING_TERM                200
+#define IGNORE_MOD_TAP_INTERRUPT    // this makes it possible to do rolling combos (zx) with keys that convert to other keys on hold (z becomes ctrl when you hold it, and when this option isn't enabled, z rapidly followed by x actually sends Ctrl-x. That's bad.)
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
 #define LOCKING_SUPPORT_ENABLE
@@ -66,28 +73,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LOCKING_RESYNC_ENABLE
 
 /* key combination for command */
-#define IS_COMMAND() ( \
-    get_mods() == (MOD_BIT(KC_LCTL) | MOD_BIT(KC_RCTL)) || \
-    get_mods() == (MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT)) \
-)
+#define IS_COMMAND()    (                                    \
+      get_mods() == (MOD_BIT(KC_LCTL) | MOD_BIT(KC_RCTL)) || \
+      get_mods() == (MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT))    \
+      )
 
 /* number of backlight levels */
-#define BACKLIGHT_LEVELS 3
+#define BACKLIGHT_LEVELS          3
 
 #ifndef LED_BRIGHTNESS_LO
-#define LED_BRIGHTNESS_LO       15
+#define LED_BRIGHTNESS_LO         15
 #endif
 #ifndef LED_BRIGHTNESS_HI
-#define LED_BRIGHTNESS_HI       255
+#define LED_BRIGHTNESS_HI         255
 #endif
-#define LED_BRIGHTNESS_DEFAULT (LED_BRIGHTNESS_HI)
+#define LED_BRIGHTNESS_DEFAULT    (LED_BRIGHTNESS_HI)
 
 /* ws2812 RGB LED */
-#define RGB_DI_PIN D7
+#define RGB_DI_PIN                D7
 #define RGBLIGHT_ANIMATIONS
-#define RGBLIGHT_HUE_STEP 12
-#define RGBLIGHT_SAT_STEP 255
-#define RGBLIGHT_VAL_STEP 12
+#define RGBLIGHT_HUE_STEP         12
+#define RGBLIGHT_SAT_STEP         255
+#define RGBLIGHT_VAL_STEP         12
 
 // Pick one of the modes
 // Defaults to 15 mirror, for legacy behavior
@@ -119,17 +126,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 // RGB backlight
-#define DRIVER_ADDR_1 0b1110100
-#define DRIVER_ADDR_2 0b1110111
-#define DRIVER_COUNT 2
-#define DRIVER_1_LED_TOTAL 24
-#define DRIVER_2_LED_TOTAL 24
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+#define DRIVER_ADDR_1                     0b1110100
+#define DRIVER_ADDR_2                     0b1110111
+#define DRIVER_COUNT                      2
+#define DRIVER_1_LED_TOTAL                24
+#define DRIVER_2_LED_TOTAL                24
+#define DRIVER_LED_TOTAL                  (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
-#define RGB_MATRIX_LED_PROCESS_LIMIT 5
-#define RGB_MATRIX_LED_FLUSH_LIMIT 26
+#define RGB_MATRIX_LED_PROCESS_LIMIT      5
+#define RGB_MATRIX_LED_FLUSH_LIMIT        26
 
-#define RGB_DISABLE_WHEN_USB_SUSPENDED true
+#define RGB_DISABLE_WHEN_USB_SUSPENDED    true
 
 // #define RGBLIGHT_COLOR_LAYER_0 0x00, 0x00, 0xFF
 /* #define RGBLIGHT_COLOR_LAYER_1 0x00, 0x00, 0xFF */
