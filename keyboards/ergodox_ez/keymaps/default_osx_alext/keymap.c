@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |EXPOSE|------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- * |        |      |      |      |      |                                       |      |      |      |      |        |
+ * |        | ALT  | CTRL | CMD  |Chlang|                                       |      |      |      |      |        |
  * `------------------------------------'                                       `------------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
@@ -112,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_NO,              KC_NO,             KC_NO,       KC_NO,         KC_NO,         KC_NO,      KC_NO,
       KC_NO,              KC_NO,             KC_NO,       KC_NO,         KC_MS_BTN1,    KC_MS_BTN2,
       KC_LSFT,            KC_NO,             KC_NO,       KC_NO,         KC_NO,         KC_NO,      KC_NO,
-      KC_NO,              KC_NO,             KC_NO,       KC_LCMD,       KC_NO,
+      KC_NO,              KC_LCTRL,          KC_LALT,     KC_LCMD,       LCMD(KC_SPC),
       KC_NO,              KC_NO,
       KC_NO,
       KC_NO,              KC_NO,             KC_NO,
