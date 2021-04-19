@@ -37,7 +37,10 @@ enum custom_keycodes {
    RSYNC,
    SEARCH,
    FIREFOX,
-   ITERM
+   ITERM,
+   CMD_C,
+   CMD_V,
+   CMD_X
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -90,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |   Esc  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |           |  F7  |  F8  |  F9  | F10  | F11  | F12  |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           | MISN |MsSrLt|MsSrDn|MsSrUp|MsSrRt|      |        |
+ * |        |      |      | CMD-X| CMD-C| CMD-V|      |           | MISN |MsSrLt|MsSrDn|MsSrUp|MsSrRt|      |        |
  * |--------+------+------+------+------+------|      |           | CTRL |------+------+------+------+------+--------|
  * |        |      |      |      |MsLtBn|MsRtBn|------|           |------|MsLeft|MsDown| MsUp |MsRght|      |        |
  * |--------+------+------+------+------+------|      |           |EXPOSE|------+------+------+------+------+--------|
@@ -109,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [MOTI] = LAYOUT_ergodox( // layer 1 : motion
       // left hand
       KC_TRNS,            KC_F1,             KC_F2,       KC_F3,         KC_F4,         KC_F5,      KC_F6,
-      KC_NO,              KC_NO,             KC_NO,       KC_NO,         KC_NO,         KC_NO,      KC_NO,
+      KC_NO,              KC_NO,             KC_NO,       CMD_X,         CMD_C,         CMD_V,      KC_NO,
       KC_NO,              KC_NO,             KC_NO,       KC_NO,         KC_MS_BTN1,    KC_MS_BTN2,
       KC_LSFT,            KC_NO,             KC_NO,       KC_NO,         KC_NO,         KC_NO,      KC_NO,
       KC_NO,              KC_LCTRL,          KC_LALT,     KC_LCMD,       LCMD(KC_SPC),
@@ -268,6 +271,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    case ZOOM_OUT :
       if (record->event.pressed) {
          SEND_STRING(SS_LCMD("-"));
+      }
+      break;
+   case CMD_C :
+      if (record->event.pressed) {
+         SEND_STRING(SS_LCMD("c"));
+      }
+      break;
+   case CMD_V :
+      if (record->event.pressed) {
+         SEND_STRING(SS_LCMD("v"));
+      }
+      break;
+   case CMD_X :
+      if (record->event.pressed) {
+         SEND_STRING(SS_LCMD("x"));
       }
       break;
    case EMAIL :

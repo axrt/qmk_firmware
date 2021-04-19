@@ -77,10 +77,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    case MUSIC_LIKE :
       if (record->event.pressed) {
          select_music();
+         // switch to miniplayer mode, otherwise the key combo won't work;
+         _delay_ms(DEFAULT_TIMEOUT);
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_M) SS_UP(X_LGUI)));
+         // tap the mapped like key;
          _delay_ms(DEFAULT_TIMEOUT);
          SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_L) SS_UP(X_LGUI));
          _delay_ms(DEFAULT_TIMEOUT);
          SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_0) SS_UP(X_LGUI)));
+         _delay_ms(DEFAULT_TIMEOUT);
+         SEND_STRING(SS_LSFT(SS_DOWN(X_LGUI) SS_TAP(X_M) SS_UP(X_LGUI)));
       }
       break;
    case MUSIC_DISLIKE :
